@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6解构赋值</title>
+</head>
+
+<body>
+    <script>
+        /*
+            对数组解构
+        */
+        {
+            let arr = [1, 2, 3]
+            let [a, b, c] = arr;
+            console.info(a, b, c);
+        }
+
+        {
+            // 逗号用来省略
+            let [a, , c] = [1, 2, 3];
+            console.info(a, c)
+        }
+       
+        {
+                /**解构赋值和“…”配合使用，这个操作符只能写在最后一个变量前面；
+                * 如果“…”在等号左边，那么就会把剩余的值合并为一个数组；如果“…”在等号右边，就是把数组展开再赋值
+                */
+                let nums = [1, 2, 3, 4, 5]        
+                let [left, ...right] = nums;
+                console.info(left, right);
+                
+                let [a, b, c, d] = [1, ...nums];
+                console.info(a, b, c, d);
+        }
+
+        {
+            // 默认赋值
+            let [foo=1] = [];
+            console.info(foo);
+        }
+        
+        console.log("-------------对象解构-------------")
+
+        /*
+            对象解构
+            1、对象的属性没有次序，变量必须与属性同名，才能取到正确的值
+        */
+       
+        {
+            let {foo, bar} = {fooo: "a", bar: "bbbb", foo: "aaa"};
+            console.info(foo, bar)
+        }
+
+        {
+            // 对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。
+            // 真正被赋值的是后者，而不是前者。foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。
+            let {foo: baz} = {foo: "aaa"};
+            console.log(baz)
+        }
+
+        {
+            let obj = {
+                p: [
+                    "aaa",
+                    {y:"hello"}
+                ]
+            }
+            let {p: [x, {...y}]} = obj;
+            console.log(x,y)
+        }
+    </script>
+</body>
+
+</html>
